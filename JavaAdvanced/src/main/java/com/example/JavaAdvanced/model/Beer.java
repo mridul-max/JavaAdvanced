@@ -1,8 +1,6 @@
 package com.example.JavaAdvanced.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Beer {
@@ -12,10 +10,15 @@ public class Beer {
     private int id;
     private String brand;
     private String model;
+
+    public Beer(){
+
+    }
     public Beer(String brand, String model) {
         this.brand = brand;
         this.model = model;
     }
+
 
     public int getId() {
         return id;
@@ -39,5 +42,14 @@ public class Beer {
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    @Override
+    public String toString() {
+        return "Beer{" +
+                "id=" + id +
+                ", brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                '}';
     }
 }

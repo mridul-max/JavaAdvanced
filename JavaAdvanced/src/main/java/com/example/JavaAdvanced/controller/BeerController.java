@@ -1,6 +1,7 @@
 package com.example.JavaAdvanced.controller;
 
 import com.example.JavaAdvanced.service.BeerService;
+import com.example.JavaAdvanced.service.BeerServiceImpl;
 import com.example.JavaAdvanced.model.Beer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,13 +26,13 @@ public class BeerController {
         beerService.addBeer(beer);
         return new ResponseEntity<>(beer,HttpStatus.CREATED);
     }
-    @RequestMapping(value = "/updateBeers/{id}",method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Beer> updateBeer(@PathVariable int id,Beer beer){
-        beerService.updateBeer(id,beer);
-        return new ResponseEntity<>(beer,HttpStatus.CREATED);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Beer> getBeerById(@PathVariable int id){
+        return new ResponseEntity<Beer>(beerService.getBeerById(id),HttpStatus.OK);
     }
-    @RequestMapping(value = "/deleteBeers/{id}",method = RequestMethod.DELETE,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void deleteBeer(@PathVariable int id){
-         beerService.deleteBeer(id);
+    @RequestMapping(value = "brand",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Beer>> getBeerByBrand(@RequestParam String name){
+        return new ResponseEntity<List<Beer>>(beerService.getBeerByBrand(name),HttpStatus.OK);
     }
+
 }
